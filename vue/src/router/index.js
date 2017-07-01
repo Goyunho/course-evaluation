@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import home from '@/components/home'
-import bu from '@/components/school/bu'
+import univ from '@/components/univ'
 
 Vue.use(Router)
 
@@ -13,9 +13,9 @@ export default new Router({
       component: home
     },
     {
-      path: '/bu',
-      name: 'bu',
-      component: bu
+      path: '/:univ',
+      name: 'univ',
+      component: univ
     }
   ]
 })

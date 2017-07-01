@@ -1,24 +1,26 @@
 <template lang='pug'>
-  #bu
-    header 백석대학교
+  #univ
+    header {{univ}}
     nav
       ul 교수평가
       ul 과목평가
 
     article
-      | 목록
-      #list(v-for='li in lis')
-        | {{ li.name }}
-
     
 </template>
 
 <script>
 export default {
-  name: 'bu',
+  name: 'univ',
   data () {
     return {
+      univ: null,
       lis: null
+    }
+  },
+  watch: {
+    '$route' (to, from) {
+      this.$set(this, 'univ', to)
     }
   },
   mounted () {
@@ -32,4 +34,9 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style lang='stylus' scoped>
+nav
+  float left
+
+article
+  float right
 </style>

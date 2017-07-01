@@ -1,12 +1,32 @@
 <template lang='pug'>
   #school
-    router-link(to='/bu')
-      #bu.button 백석대학교
+    #schools(v-for="school in schools")
+      .col-md-4.pb-2
+        b-button(:size="''", :variant="'outline-success'", @click="link('/'+school.name_short_en)")
+          | {{ school.name }}
 </template>
 
 <script>
+import router from '../router'
+
 export default {
-  name: 'school'
+  name: 'school',
+  data () {
+    return {
+      schools: null
+    }
+  },
+  methods: {
+    link (url) {
+      router.push(url)
+    }
+  },
+  mounted () {
+    this.$http.get('http://127.0.0.1:8000/university/?format=json')
+    .then((result) => {
+      this.$set(this, 'schools', result.data)
+    })
+  }
 }
 </script>
 
@@ -25,9 +45,4 @@ li
 
 a 
   color: black
-
-.button
-  display inline-block
-  padding 1em
-  box-shadow 0 0 1px rgba(30, 30, 90, 1)
 </style>
