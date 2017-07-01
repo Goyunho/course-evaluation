@@ -8,6 +8,12 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 class University(models.Model):
     name = models.CharField(
         verbose_name='학교명', default='', max_length=50)
+    name_short = models.CharField(
+        verbose_name='축약명', default='', max_length=50, blank=True)
+    name_en = models.CharField(
+        verbose_name='영문명', default='', max_length=50, blank=True)
+    name_short_en = models.CharField(
+        verbose_name='축약영문명', default='', max_length=50, blank=True)
 
     def __str__(self):
         return self.name
