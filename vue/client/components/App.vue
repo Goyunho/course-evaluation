@@ -1,27 +1,20 @@
-<template>
-  <div id="app">
-    <router-view></router-view>
-  </div>
+<template lang="pug">
+  .app
+    router-view
 </template>
 
-<style>
-body {
-  margin: 0;
-  font-size: 2rem;
+<script>
+</script>
+
+<style lang="stylus">
+body
+  margin: 0
+  font-size: 1rem
   font-family: -apple-system, BlinkMacSystemFont,
                'avenir next', avenir,
                helvetica, 'helvetica neue',
                Ubuntu,
                'segoe ui', arial,
-               sans-serif;
-}
-.page {
-  text-align: center;
-  /* nesting for the need to test postcss */
-  code {
-    background-color: #f0f0f0;
-    padding: 3px 5px;
-    border-radius: 2px;
-  }
-}
+               sans-serif
+  background-color #f0f0f0 
 </style>
