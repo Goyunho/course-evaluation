@@ -10,7 +10,11 @@ import App from './components/App'
 import router from './router'
 import store from './store'
 
+import global from './global'
+
 Vue.prototype.$http = axios
+Vue.prototype.$glob = global
+
 Vue.use(BootstrapVue)
 
 sync(store, router)

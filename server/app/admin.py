@@ -5,7 +5,7 @@ from django.contrib.auth.models import User
 
 class UniversityAdmin(admin.ModelAdmin):
     model = University
-    list_display = ('name', 'name_short', 'name_en', 'name_short_en',)
+    list_display = ('name', 'name_short', 'name_en', 'name_en_short',)
 
 
 class UndergraduateAdmin(admin.ModelAdmin):

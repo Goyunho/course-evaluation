@@ -1,16 +1,22 @@
 from rest_framework import serializers
 from .models import *
 
-class UniversitySerializers(serializers.HyperlinkedModelSerializer):
-    class Meta:
-        model = University
-        fields = '__all__'
-
 
 class UndergraduateSerializers(serializers.HyperlinkedModelSerializer):
+    department = serializers.StringRelatedField(many=True)
     class Meta:
         model = Undergraduate
-        fields = '__all__'
+        fields = ('id', 'url', 'name', 'department')
+        # fields = '__all__'
+
+
+class UniversitySerializers(serializers.HyperlinkedModelSerializer):
+    # undergraduate = serializers.StringRelatedField(many=True)
+    undergraduate = UndergraduateSerializers(many=True, read_only=True)
+    class Meta:
+        model = University
+        fields = ('id', 'url', 'name', 'name_short', 'name_en', 'name_en_short', 'undergraduate', )
+        # fields = '__all__'
 
 
 class DepartmentSerializers(serializers.HyperlinkedModelSerializer):

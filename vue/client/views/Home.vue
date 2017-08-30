@@ -1,19 +1,13 @@
 <template lang='pug'>
   .page
-    b-button(@click="univ()") 대학 조회
-    b-button(@click="univ()") 강의 조회
-    b-button(@click="$router.push('index')") 교수 조회
+    b-button(@click="$router.push({name:'university'})") 대학 조회
+    b-button(@click="$router.push({name:'faculty'})") 교수 조회
+    b-button(@click="$router.push({name:'course'})") 강의 조회
 </template>
 
 <script>
 export default {
-  components: {
-  },
-  methods: {
-    univ () {
-      this.$router.push('index')
-    }
-  }
+
 }
 </script>
 
@@ -21,8 +15,8 @@ export default {
 .page
   margin auto
   text-align center
-  padding 3em
+  padding 10em
 
-b-button
-  margin 2em
+button
+  margin 0.5em
 </style>

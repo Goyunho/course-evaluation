@@ -33,6 +33,6 @@ export default {
 
 .sign-input
   display inline
-  margin 0.5em
+  margin 0.2em
   width 10em
 </style>

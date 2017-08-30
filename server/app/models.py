@@ -12,7 +12,7 @@ class University(models.Model):
         verbose_name='축약명', default='', max_length=50, blank=True)
     name_en = models.CharField(
         verbose_name='영문명', default='', max_length=50, blank=True)
-    name_short_en = models.CharField(
+    name_en_short = models.CharField(
         verbose_name='축약영문명', default='', max_length=50, blank=True)
 
     def __str__(self):
@@ -22,7 +22,7 @@ class University(models.Model):
 class Undergraduate(models.Model):
     name = models.CharField(
         verbose_name='학부명', default='', max_length=50)
-    university = models.ForeignKey(University, verbose_name='학교',
+    university = models.ForeignKey(University, related_name='undergraduate', verbose_name='학교',
                                    on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
@@ -32,7 +32,7 @@ class Undergraduate(models.Model):
 class Department(models.Model):
     name = models.CharField(
         verbose_name='학과명', default='', max_length=50)
-    undergraduate = models.ForeignKey(Undergraduate, verbose_name='학부',
+    undergraduate = models.ForeignKey(Undergraduate, related_name='department', verbose_name='학부',
                                       on_delete=models.DO_NOTHING, null=True)
 
     def __str__(self):
@@ -49,7 +49,7 @@ class Faculty(models.Model):
     phone = models.CharField(
         verbose_name='전화번호', default='', max_length=20)
     belong = models.ForeignKey(
-        Department, verbose_name='소속', on_delete=models.DO_NOTHING, blank=True, null=True)
+        Department, related_name='faculty', verbose_name='소속', on_delete=models.DO_NOTHING, blank=True, null=True)
 
     def __str__(self):
         return self.name
@@ -58,6 +58,8 @@ class Faculty(models.Model):
 class Course(models.Model):
     name = models.CharField(
         verbose_name='강의명', max_length=20)
+    belong = models.ForeignKey(
+        Department, related_name='course', verbose_name='소속', on_delete=models.DO_NOTHING, blank=True, null=True)
     faculty = models.ForeignKey(
         Faculty, verbose_name='강사', on_delete=models.DO_NOTHING)
     info = models.TextField(

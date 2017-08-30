@@ -1,7 +1,9 @@
 <template lang="pug">
   .index
     v-header
-    router-view
+
+    router-view(name="main")
+
     v-footer
 </template>
 
@@ -26,4 +28,10 @@ export default {
   background-color white
   box-shadow 0em 0em 0.1em black
   border-radius 0.5em
+
+article
+  margin 2em
+  background-color white
+  border-radius 0.3em
+  box-shadow 0em 0em 0.1em black
 </style>
