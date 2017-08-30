@@ -2,38 +2,59 @@ from rest_framework import serializers
 from .models import *
 
 
-class UndergraduateSerializers(serializers.HyperlinkedModelSerializer):
-    department = serializers.StringRelatedField(many=True)
+# Course
+class CourseSerializers(serializers.HyperlinkedModelSerializer):
     class Meta:
-        model = Undergraduate
-        fields = ('id', 'url', 'name', 'department')
-        # fields = '__all__'
+        model = Course
+        fields = '__all__'
 
 
-class UniversitySerializers(serializers.HyperlinkedModelSerializer):
-    # undergraduate = serializers.StringRelatedField(many=True)
-    undergraduate = UndergraduateSerializers(many=True, read_only=True)
-    class Meta:
-        model = University
-        fields = ('id', 'url', 'name', 'name_short', 'name_en', 'name_en_short', 'undergraduate', )
-        # fields = '__all__'
-
-
-class DepartmentSerializers(serializers.HyperlinkedModelSerializer):
+# Department
+class DepartmentListSerializers(serializers.HyperlinkedModelSerializer):
     class Meta:
         model = Department
         fields = '__all__'
 
 
-class FacultySerializers(serializers.HyperlinkedModelSerializer):
+class DepartmentSerializers(serializers.HyperlinkedModelSerializer):
+    course = CourseSerializers(many=True, read_only=True)
     class Meta:
-        model = Faculty
+        model = Department
+        fields = ('id', 'url', 'name', 'course')
+
+
+# Undergraduate
+class UndergraduateListSerializers(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Undergraduate
         fields = '__all__'
 
 
-class CourseSerializers(serializers.HyperlinkedModelSerializer):
+class UndergraduateSerializers(serializers.HyperlinkedModelSerializer):
+    department = DepartmentListSerializers(many=True, read_only=True)
     class Meta:
-        model = Course
+        model = Undergraduate
+        fields = ('id', 'url', 'name', 'department')
+
+
+# University
+class UniversityListSerializers(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = University
+        fields = '__all__'
+
+
+class UniversitySerializers(serializers.HyperlinkedModelSerializer):
+    undergraduate = UndergraduateListSerializers(many=True, read_only=True)
+    class Meta:
+        model = University
+        fields = ('id', 'url', 'name', 'name_short', 'name_en', 'name_en_short', 'undergraduate', )
+
+
+# Faculty
+class FacultySerializers(serializers.HyperlinkedModelSerializer):
+    class Meta:
+        model = Faculty
         fields = '__all__'
 
 

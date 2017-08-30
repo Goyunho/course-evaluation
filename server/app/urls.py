@@ -16,5 +16,4 @@ router.register(r'evaluation-record', EvaluationRecordAPI)
 urlpatterns = [
     # category
     url(r'^', include(router.urls)),
-
 ]
